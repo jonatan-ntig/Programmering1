@@ -1,0 +1,13 @@
+# <meta charset="UTF-8">
+# <style>body {opacity:none} input {opacity:100%!important}</style>
+# <script>window.funktion = function(data) { return `${Math.floor(data / 3600)} timmar, ${Math.floor((data % 3600) / 60)} minuter, ${data % 60} sekunder` }</script>
+# <input id="data" type="number" placeholder="Ange antalet sekunder"><button onClick="alert(window.funktion(document.querySelector('input').value))">Räkna</button>
+
+data = int(input("Ange antalet sekunder: "))
+
+tim = data // 3600
+
+min = (data % 3600) // 60
+sek = data % 60
+
+print(f"{tim} timmar, {min} minuter, {sek} sekunder")
