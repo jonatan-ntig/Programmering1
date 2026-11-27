@@ -1,13 +1,17 @@
 import re
+konsonanter=r'([bcdfghjklmnpqrstvwxz])'
+rövarspråk=r'([bcdfghjklmnpqrstvwxz])o([bcdfghjklmnpqrstvwxz])'
 
 def sv_to_rövarspråk(string: str):
-    konsonanter=r'([bcdfghjklmnpqrstvwxz])'
-    rövarspråk=r'\1o\1'
-    return re.sub(konsonanter, rövarspråk, string)
+    return re.sub(konsonanter, r'\1o\1', string, flags=re.IGNORECASE)
 
 def rövarspråk_to_sv(string: str):
-    rövarspråk=r'([bcdfghjklmnpqrstvwxz])o([bcdfghjklmnpqrstvwxz])'
     return re.sub(rövarspråk, r'\1', string, flags=re.IGNORECASE)
 
-print(rövarspråk_to_sv("Jojagog totalolaror rorövovarorsospoproråkoketot"))
+def översätt(string: str):
+    if re.fullmatch(r'(?:([bcdfghjklmnpqrstvwxz])o\1|[aouåeiyäö])*', string, flags=re.IGNORECASE):
+        return rövarspråk_to_sv(string)
+    else:
+        return sv_to_rövarspråk(string)
 
+print(översätt(input("Skriv in texten du vill översätta: ")))
